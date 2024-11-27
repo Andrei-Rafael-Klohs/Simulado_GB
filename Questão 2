@@ -1,0 +1,53 @@
+*/O jogo "Whack-a-Mole" é um jogo divertido onde toupeiras aparecem aleatoriamente em diferentes buracos, e
+o objetivo do jogador é acertar as toupeiras que surgem. Neste exercício, vamos simular uma versão simplificada do
+surgimento das toupeiras do jogo utilizando uma matriz 4x4. A cada ciclo, quatro toupeiras aparecerão em posições
+aleatórias dentro da matriz, representadas pelo símbolo 'T', enquanto os buracos restantes estarão vazios,
+representados pelo símbolo '-'. Sua tarefa é gerar e exibir três gerações diferentes dessas matrizes.*\
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define TAMANHO 4
+#define TOUPEIRAS 4
+
+// Função que gera uma matriz 4x4 com toupeiras em posições aleatórias
+void gerarToupeiras(char matriz[TAMANHO][TAMANHO]) {
+// Inicializa a matriz com '-'
+for (int i = 0; i < TAMANHO; i++) {
+for (int j = 0; j < TAMANHO; j++) {
+matriz[i][j] = '-';
+}
+}
+int toupeirasColocadas = 0;
+while (toupeirasColocadas < TOUPEIRAS) {
+int i = rand() % TAMANHO; // Sorteia uma linha
+int j = rand() % TAMANHO; // Sorteia uma coluna
+// Verifica se a posição está vazia
+if (matriz[i][j] == '-') {
+matriz[i][j] = 'T'; // Coloca uma toupeira
+toupeirasColocadas++; // Incrementa o contador
+}
+}
+}
+// Função que imprime a matriz 4x4
+void imprimirMatriz(char matriz[TAMANHO][TAMANHO]) {
+for (int i = 0; i < TAMANHO; i++) {
+for (int j = 0; j < TAMANHO; j++) {
+printf("%c ", matriz[i][j]);
+}
+printf("\n");
+}
+}
+int main() {
+srand(time(NULL)); // Inicializa o gerador de números aleatórios
+char matriz[TAMANHO][TAMANHO];
+// Gera e exibe três gerações de matrizes
+for (int gen = 1; gen <= 3; gen++) {
+printf("Geração %d:\n", gen);
+gerarToupeiras(matriz);
+imprimirMatriz(matriz);
+printf("\n");
+}
+return 0;
+}
+
